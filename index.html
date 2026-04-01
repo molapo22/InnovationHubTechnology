@@ -1,0 +1,1377 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="description" content="Molapo's Innovation Hub Tech – ICT Consultancy, Software Development, Tutoring & Branding. Your tech savvy partner in Lesotho and beyond.">
+  <meta name="theme-color" content="#0A2A3B">
+  <meta name="author" content="Tsietsi Molapo">
+  <title>Molapo's Innovation Hub | ICT Consultancy & Branding</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #FFFDF8;
+      color: #1E2A32;
+      line-height: 1.5;
+      scroll-behavior: smooth;
+    }
+
+    .container {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+
+    :root {
+      --primary-dark: #0A2A3B;
+      --primary-navy: #123D4F;
+      --accent-gold: #C69C6D;
+      --accent-warm: #D9A066;
+      --light-bg: #FFF9F0;
+      --gray-mid: #5C6E7A;
+      --soft-white: #FFFFFF;
+      --whatsapp-green: #25D366;
+      --shadow-sm: 0 4px 6px rgba(0, 0, 0, 0.05);
+      --shadow-md: 0 10px 25px rgba(0, 0, 0, 0.08);
+      --shadow-lg: 0 20px 35px rgba(0, 0, 0, 0.1);
+      --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    /* Scroll Progress Bar */
+    .progress-bar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 0%;
+      height: 4px;
+      background: linear-gradient(90deg, var(--accent-gold), var(--accent-warm));
+      z-index: 1001;
+      transition: width 0.1s ease;
+    }
+
+    header {
+      background: var(--soft-white);
+      box-shadow: var(--shadow-sm);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      transition: var(--transition);
+    }
+
+    header.scrolled {
+      box-shadow: var(--shadow-md);
+    }
+
+    .navbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      padding: 0.8rem 0;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      cursor: pointer;
+    }
+    
+    .logo-img {
+      width: 58px;
+      height: 58px;
+      border-radius: 50%;
+      object-fit: cover;
+      display: block;
+      box-shadow: var(--shadow-sm);
+      border: 2px solid var(--accent-gold);
+      transition: var(--transition);
+    }
+    
+    .logo-img:hover {
+      transform: scale(1.05);
+    }
+    
+    .logo-icon-fallback {
+      background: linear-gradient(135deg, #0A2A3B, #1F5E7A);
+      width: 58px;
+      height: 58px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 2px solid var(--accent-gold);
+    }
+    
+    .logo-icon-fallback i {
+      font-size: 30px;
+      color: var(--accent-gold);
+    }
+    
+    .logo-text h1 {
+      font-size: 1.7rem;
+      font-weight: 800;
+      color: var(--primary-dark);
+      letter-spacing: -0.3px;
+      line-height: 1.2;
+    }
+    .logo-text .tagline {
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 1.2px;
+      color: var(--accent-warm);
+      text-transform: uppercase;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2.2rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      font-weight: 600;
+      color: var(--primary-navy);
+      transition: var(--transition);
+      font-size: 1rem;
+      padding-bottom: 6px;
+      position: relative;
+    }
+    
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: var(--accent-gold);
+      transition: width 0.3s ease;
+    }
+    
+    .nav-links a:hover::after,
+    .nav-links a.active::after {
+      width: 100%;
+    }
+    
+    .nav-links a:hover, .nav-links a.active {
+      color: var(--accent-gold);
+    }
+
+    .mobile-menu {
+      display: none;
+      font-size: 1.8rem;
+      cursor: pointer;
+      color: var(--primary-navy);
+    }
+
+    section {
+      padding: 5rem 0;
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    
+    section.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    
+    .section-title {
+      font-size: 2.2rem;
+      font-weight: 800;
+      text-align: center;
+      margin-bottom: 3rem;
+      color: var(--primary-dark);
+      position: relative;
+    }
+    .section-title:after {
+      content: '';
+      display: block;
+      width: 70px;
+      height: 3px;
+      background: var(--accent-gold);
+      margin: 0.7rem auto 0;
+      border-radius: 4px;
+    }
+
+    .hero {
+      background: linear-gradient(115deg, #FEF7EA 0%, #FFFBF4 100%);
+      padding: 3rem 0 4.5rem;
+      border-bottom: 1px solid #F5E7D4;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .hero-grid {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+      flex-wrap: wrap;
+      position: relative;
+      z-index: 1;
+    }
+    .hero-text {
+      flex: 1;
+    }
+    .hero-text h2 {
+      font-size: 2.8rem;
+      font-weight: 800;
+      line-height: 1.2;
+      margin-bottom: 0.75rem;
+      color: var(--primary-dark);
+    }
+    .hero-brand-line {
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: var(--accent-warm);
+      letter-spacing: 1px;
+      margin-bottom: 1rem;
+      text-transform: uppercase;
+    }
+    .hero-text p {
+      font-size: 1.2rem;
+      color: #4A5B66;
+      margin-bottom: 2rem;
+      max-width: 90%;
+    }
+    .btn-group {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+    .btn {
+      display: inline-block;
+      padding: 0.85rem 2rem;
+      border-radius: 40px;
+      font-weight: 700;
+      text-decoration: none;
+      transition: var(--transition);
+      cursor: pointer;
+    }
+    .btn-primary {
+      background: var(--primary-navy);
+      color: white;
+      box-shadow: 0 4px 12px rgba(18,61,79,0.2);
+    }
+    .btn-primary:hover {
+      background: #0F2F3E;
+      transform: translateY(-3px);
+    }
+    .btn-outline {
+      border: 2px solid var(--primary-navy);
+      color: var(--primary-navy);
+      background: transparent;
+    }
+    .btn-outline:hover {
+      background: var(--primary-navy);
+      color: white;
+    }
+    .hero-icon {
+      flex: 0.8;
+      text-align: center;
+      font-size: 7rem;
+      color: var(--accent-gold);
+      background: rgba(198,156,109,0.08);
+      border-radius: 70px;
+      padding: 1.2rem;
+      animation: float 3s ease-in-out infinite;
+    }
+    
+    @keyframes float {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-15px); }
+    }
+
+    /* Enhanced Services Grid */
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+      gap: 2rem;
+    }
+    .service-card {
+      background: var(--soft-white);
+      padding: 2rem;
+      border-radius: 28px;
+      box-shadow: var(--shadow-sm);
+      transition: var(--transition);
+      border: 1px solid #F1E6D9;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .service-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 4px;
+      background: linear-gradient(90deg, var(--accent-gold), var(--accent-warm));
+      transform: scaleX(0);
+      transition: transform 0.4s ease;
+    }
+    
+    .service-card:hover::before {
+      transform: scaleX(1);
+    }
+    
+    .service-card:hover {
+      transform: translateY(-8px);
+      box-shadow: var(--shadow-lg);
+      border-color: var(--accent-gold);
+    }
+    
+    .service-card i {
+      font-size: 2.5rem;
+      color: var(--accent-gold);
+      margin-bottom: 1rem;
+      transition: var(--transition);
+    }
+    
+    .service-card:hover i {
+      transform: scale(1.1);
+    }
+    
+    .service-card h3 {
+      font-size: 1.4rem;
+      margin-bottom: 1rem;
+      color: var(--primary-dark);
+    }
+    
+    .service-card .service-desc {
+      color: #6C7E8A;
+      font-size: 0.9rem;
+      margin-bottom: 1rem;
+      font-weight: 500;
+    }
+    
+    .service-list {
+      list-style: none;
+      margin-top: 1rem;
+    }
+    
+    .service-list li {
+      font-size: 0.85rem;
+      color: #5C6E7A;
+      padding: 0.4rem 0;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      border-bottom: 1px dashed #F0E3D6;
+    }
+    
+    .service-list li:last-child {
+      border-bottom: none;
+    }
+    
+    .service-list li i {
+      font-size: 0.7rem;
+      color: var(--accent-gold);
+      margin-bottom: 0;
+      width: 16px;
+    }
+
+    /* Clients Section */
+    .clients-section {
+      background: linear-gradient(105deg, #FEF9F0 0%, #FFFCF7 100%);
+      border-radius: 2rem;
+      padding: 3rem 2rem;
+      margin: 2rem 0;
+    }
+    
+    .clients-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+    
+    .client-card {
+      background: var(--soft-white);
+      padding: 1.5rem;
+      border-radius: 24px;
+      text-align: center;
+      transition: var(--transition);
+      border: 1px solid #F1E6D9;
+      cursor: pointer;
+    }
+    
+    .client-card:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--shadow-lg);
+      border-color: var(--accent-gold);
+    }
+    
+    .client-logo {
+      width: 100px;
+      height: 100px;
+      margin: 0 auto 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #FDF6EC;
+      border-radius: 50%;
+      overflow: hidden;
+      transition: var(--transition);
+    }
+    
+    .client-logo img {
+      width: 60px;
+      height: 60px;
+      object-fit: contain;
+    }
+    
+    .client-logo-placeholder {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, #FDF6EC, #FFF9F0);
+    }
+    
+    .client-logo-placeholder i {
+      font-size: 2.5rem;
+      color: var(--accent-gold);
+    }
+    
+    .client-card:hover .client-logo-placeholder {
+      background: linear-gradient(135deg, var(--accent-gold), var(--accent-warm));
+    }
+    
+    .client-card:hover .client-logo-placeholder i {
+      color: white;
+    }
+    
+    .client-card h4 {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--primary-dark);
+      margin-bottom: 0.3rem;
+    }
+    
+    .client-type {
+      display: inline-block;
+      background: rgba(198,156,109,0.1);
+      padding: 0.2rem 0.8rem;
+      border-radius: 20px;
+      font-size: 0.7rem;
+      font-weight: 600;
+      color: var(--accent-warm);
+    }
+    
+    .trust-badge {
+      text-align: center;
+      margin-top: 2.5rem;
+      padding-top: 2rem;
+      border-top: 1px solid #F0E3D6;
+    }
+
+    .about-content {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 3rem;
+      align-items: center;
+      background: var(--soft-white);
+      border-radius: 2rem;
+      padding: 2rem;
+      box-shadow: var(--shadow-sm);
+      border: 1px solid #F3E8DD;
+    }
+    
+    .about-text {
+      flex: 1.2;
+    }
+    .about-text p {
+      margin-bottom: 1rem;
+      font-size: 1.05rem;
+    }
+    .about-stats {
+      flex: 0.8;
+      background: #FDF6EC;
+      padding: 2rem;
+      border-radius: 2rem;
+      border-left: 5px solid var(--accent-gold);
+    }
+    .stat-item {
+      margin-bottom: 1.5rem;
+    }
+    .stat-number {
+      font-weight: 800;
+      font-size: 1.8rem;
+      color: var(--primary-navy);
+    }
+
+    /* Founder Section */
+    .founder-section {
+      background: linear-gradient(105deg, #FEF9F0 0%, #FFFCF7 100%);
+      border-radius: 2rem;
+      margin-top: 2rem;
+    }
+    .founder-card {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: stretch;
+      gap: 2.5rem;
+      background: var(--soft-white);
+      border-radius: 2rem;
+      padding: 2rem;
+      box-shadow: var(--shadow-md);
+      border: 1px solid #F0E3D6;
+    }
+    
+    .founder-avatar {
+      flex: 0.28;
+      min-width: 180px;
+      text-align: center;
+    }
+    .founder-avatar-img {
+      width: 170px;
+      height: 170px;
+      border-radius: 50%;
+      margin: 0 auto;
+      overflow: hidden;
+      box-shadow: var(--shadow-lg);
+      border: 3px solid var(--accent-gold);
+    }
+    .founder-avatar-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .founder-avatar h3 {
+      margin-top: 1rem;
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: var(--primary-dark);
+    }
+    .founder-bio {
+      flex: 0.72;
+    }
+    .founder-title {
+      display: inline-block;
+      background: rgba(198,156,109,0.15);
+      padding: 0.3rem 1rem;
+      border-radius: 30px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--accent-warm);
+      margin-bottom: 0.75rem;
+    }
+    .founder-bio p {
+      margin-bottom: 0.9rem;
+      line-height: 1.6;
+      color: #2D3E48;
+    }
+    .cert-badge {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin: 1rem 0;
+    }
+    .cert-tag {
+      background: #F0E8DD;
+      padding: 0.25rem 0.8rem;
+      border-radius: 20px;
+      font-size: 0.7rem;
+      font-weight: 500;
+      color: #5C4E3D;
+    }
+    .linkedin-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      background: #0077B5;
+      color: white;
+      padding: 0.7rem 1.6rem;
+      border-radius: 40px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: var(--transition);
+      margin-top: 0.8rem;
+    }
+    .linkedin-link:hover {
+      background: #005e8c;
+      transform: translateY(-2px);
+    }
+    .founder-quote {
+      flex: 0.3;
+      background: #FDF6EC;
+      padding: 1.5rem;
+      border-radius: 1.5rem;
+      border-left: 4px solid var(--accent-gold);
+      font-style: italic;
+      color: #4A5B66;
+    }
+
+    /* Contact Section */
+    .contact-wrapper {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2.5rem;
+      background: var(--soft-white);
+      border-radius: 2rem;
+      padding: 2rem;
+      box-shadow: var(--shadow-md);
+      border: 1px solid #F0E3D6;
+    }
+    
+    .contact-info {
+      flex: 1;
+      min-width: 280px;
+    }
+    
+    .contact-form {
+      flex: 1;
+      min-width: 280px;
+    }
+    
+    .contact-info h3, .contact-form h3 {
+      font-size: 1.6rem;
+      margin-bottom: 1.5rem;
+      color: var(--primary-dark);
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+    
+    .contact-info h3 i, .contact-form h3 i {
+      color: var(--accent-gold);
+    }
+    
+    .contact-detail {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+      flex-wrap: wrap;
+    }
+    
+    .contact-detail i {
+      font-size: 1.5rem;
+      width: 2rem;
+      color: var(--accent-gold);
+    }
+    
+    .social-links {
+      display: flex;
+      gap: 1.2rem;
+      margin-top: 2rem;
+      flex-wrap: wrap;
+    }
+    
+    .social-links a {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 48px;
+      height: 48px;
+      background: #FDF6EC;
+      border-radius: 50%;
+      transition: var(--transition);
+      text-decoration: none;
+    }
+    
+    .social-links a i {
+      font-size: 1.5rem;
+      color: var(--accent-gold);
+    }
+    
+    .social-links a:hover {
+      background: var(--accent-gold);
+      transform: translateY(-3px);
+    }
+    
+    .social-links a:hover i {
+      color: white;
+    }
+    
+    .form-group {
+      margin-bottom: 1.2rem;
+    }
+    
+    input, textarea {
+      width: 100%;
+      padding: 0.9rem 1rem;
+      border: 1px solid #E2D5C4;
+      border-radius: 1.2rem;
+      font-family: 'Inter', sans-serif;
+      font-size: 1rem;
+      background: #FEFCF8;
+      transition: var(--transition);
+    }
+    
+    input:focus, textarea:focus {
+      outline: none;
+      border-color: var(--accent-gold);
+      box-shadow: 0 0 0 3px rgba(198,156,109,0.15);
+    }
+    
+    button[type="submit"] {
+      background: var(--primary-navy);
+      color: white;
+      border: none;
+      width: 100%;
+      padding: 0.9rem;
+      border-radius: 2rem;
+      font-weight: bold;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: var(--transition);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+    }
+    
+    button[type="submit"]:hover {
+      background: #0B3140;
+      transform: translateY(-2px);
+    }
+    
+    .form-message {
+      margin-top: 1rem;
+      font-size: 0.85rem;
+      text-align: center;
+      padding: 0.5rem;
+      border-radius: 0.5rem;
+    }
+
+    .back-to-top {
+      position: fixed;
+      bottom: 100px;
+      right: 30px;
+      background: var(--primary-navy);
+      color: white;
+      width: 45px;
+      height: 45px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      opacity: 0;
+      visibility: hidden;
+      transition: var(--transition);
+      z-index: 999;
+    }
+    
+    .back-to-top.show {
+      opacity: 1;
+      visibility: visible;
+    }
+    
+    .back-to-top:hover {
+      background: var(--accent-gold);
+    }
+    
+    .whatsapp-float {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      background-color: var(--whatsapp-green);
+      color: white;
+      border-radius: 50px;
+      padding: 12px 20px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: var(--transition);
+      z-index: 1000;
+    }
+    .whatsapp-float i {
+      font-size: 1.8rem;
+    }
+    .whatsapp-float span {
+      font-size: 0.9rem;
+    }
+    .whatsapp-float:hover {
+      transform: scale(1.05);
+    }
+
+    footer {
+      background: var(--primary-dark);
+      color: #E9DFCF;
+      text-align: center;
+      padding: 2rem 0;
+      margin-top: 2rem;
+      position: relative;
+    }
+    
+    footer::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      background: linear-gradient(90deg, var(--accent-gold), var(--accent-warm));
+    }
+
+    /* Responsive */
+    @media (max-width: 880px) {
+      .founder-card {
+        flex-direction: column;
+      }
+      .founder-avatar {
+        flex: auto;
+      }
+      .founder-quote {
+        flex: auto;
+      }
+    }
+
+    @media (max-width: 780px) {
+      .container {
+        padding: 0 1.5rem;
+      }
+      .nav-links {
+        display: none;
+        width: 100%;
+        flex-direction: column;
+        align-items: center;
+        gap: 1rem;
+        margin-top: 1rem;
+      }
+      .nav-links.show {
+        display: flex;
+      }
+      .mobile-menu {
+        display: block;
+      }
+      .hero-grid {
+        flex-direction: column-reverse;
+        text-align: center;
+      }
+      .hero-text p {
+        max-width: 100%;
+      }
+      .btn-group {
+        justify-content: center;
+      }
+      .section-title {
+        font-size: 1.8rem;
+      }
+      .services-grid {
+        grid-template-columns: 1fr;
+      }
+      .contact-info, .contact-form {
+        min-width: 100%;
+      }
+      .whatsapp-float span {
+        display: none;
+      }
+      .back-to-top {
+        bottom: 90px;
+        right: 20px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .contact-detail {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .client-logo {
+        width: 80px;
+        height: 80px;
+      }
+      .client-logo img {
+        width: 50px;
+        height: 50px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<div class="progress-bar" id="progressBar"></div>
+
+<header id="header">
+  <div class="container">
+    <div class="navbar">
+      <div class="logo">
+        <img src="Logos.png" alt="Logo" class="logo-img" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+        <div class="logo-icon-fallback" style="display: none;">
+          <i class="fas fa-microchip"></i>
+        </div>
+        <div class="logo-text">
+          <h1>MOLAPO'S</h1>
+          <div class="tagline">INNOVATION HUB TECH</div>
+        </div>
+      </div>
+      
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#home" class="nav-link active">Home</a></li>
+        <li><a href="#services" class="nav-link">Services</a></li>
+        <li><a href="#clients" class="nav-link">Clients</a></li>
+        <li><a href="#about" class="nav-link">About Us</a></li>
+        <li><a href="#founder" class="nav-link">Founder</a></li>
+        <li><a href="#contact" class="nav-link">Contact</a></li>
+      </ul>
+      <div class="mobile-menu" id="menuIcon">
+        <i class="fas fa-bars"></i>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main>
+  <section id="home" class="hero">
+    <div class="container">
+      <div class="hero-grid">
+        <div class="hero-text">
+          <div class="hero-brand-line">ICT CONSULTANCY & BRANDING</div>
+          <h2>Your Tech Savvy <br>Ready To Serve You</h2>
+          <p>Empowering business growth through software innovation, expert tutoring, and creative design. From ICT fundamentals to full-scale digital transformation — we deliver excellence.</p>
+          <div class="btn-group">
+            <a href="#services" class="btn btn-primary">Explore Services</a>
+            <a href="#contact" class="btn btn-outline">Get in Touch</a>
+          </div>
+        </div>
+        <div class="hero-icon">
+          <i class="fas fa-chalkboard-user"></i>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="services">
+    <div class="container">
+      <h2 class="section-title">Our Core Offerings</h2>
+      <div class="services-grid">
+        <!-- ICT Consultancy -->
+        <div class="service-card">
+          <i class="fas fa-chart-line"></i>
+          <h3>ICT Consultancy</h3>
+          <div class="service-desc">Expert IT advisory and strategic support</div>
+          <ul class="service-list">
+            <li><i class="fas fa-check-circle"></i> IT infrastructure assessment and audits</li>
+            <li><i class="fas fa-check-circle"></i> Network performance analysis and optimization</li>
+            <li><i class="fas fa-check-circle"></i> Digital transformation strategy development</li>
+            <li><i class="fas fa-check-circle"></i> IT policy and procedure development</li>
+            <li><i class="fas fa-check-circle"></i> System migration planning (cloud/on-premise)</li>
+            <li><i class="fas fa-check-circle"></i> Cybersecurity risk assessment</li>
+            <li><i class="fas fa-check-circle"></i> Technology roadmap creation</li>
+            <li><i class="fas fa-check-circle"></i> IT cost optimization and budgeting support</li>
+          </ul>
+        </div>
+
+        <!-- Software System Development -->
+        <div class="service-card">
+          <i class="fas fa-laptop-code"></i>
+          <h3>Software System Development</h3>
+          <div class="service-desc">Powerful, scalable systems built for your needs</div>
+          <ul class="service-list">
+            <li><i class="fas fa-check-circle"></i> Custom software design and architecture</li>
+            <li><i class="fas fa-check-circle"></i> Web and desktop application development</li>
+            <li><i class="fas fa-check-circle"></i> CRM and ERP system development</li>
+            <li><i class="fas fa-check-circle"></i> Point of Sale (POS) system development</li>
+            <li><i class="fas fa-check-circle"></i> API development and third-party integrations</li>
+            <li><i class="fas fa-check-circle"></i> Database design, setup, and management</li>
+            <li><i class="fas fa-check-circle"></i> System testing, debugging, and optimization</li>
+            <li><i class="fas fa-check-circle"></i> Software maintenance and technical support</li>
+          </ul>
+        </div>
+
+        <!-- Websites & E-Commerce -->
+        <div class="service-card">
+          <i class="fas fa-globe"></i>
+          <h3>Websites & E-Commerce</h3>
+          <div class="service-desc">Professional online platforms that convert</div>
+          <ul class="service-list">
+            <li><i class="fas fa-check-circle"></i> Business and personal website development</li>
+            <li><i class="fas fa-check-circle"></i> E-commerce store setup and customization</li>
+            <li><i class="fas fa-check-circle"></i> CMS development (WordPress, custom)</li>
+            <li><i class="fas fa-check-circle"></i> Website UI/UX design and responsiveness</li>
+            <li><i class="fas fa-check-circle"></i> Payment gateway integration</li>
+            <li><i class="fas fa-check-circle"></i> Website speed optimization</li>
+            <li><i class="fas fa-check-circle"></i> SEO (Search Engine Optimization) setup</li>
+            <li><i class="fas fa-check-circle"></i> Website maintenance and content updates</li>
+          </ul>
+        </div>
+
+        <!-- ICT Fundamentals Training -->
+        <div class="service-card">
+          <i class="fas fa-desktop"></i>
+          <h3>ICT Fundamentals Training</h3>
+          <div class="service-desc">Essential digital skills for everyone</div>
+          <ul class="service-list">
+            <li><i class="fas fa-check-circle"></i> Basic computer literacy training</li>
+            <li><i class="fas fa-check-circle"></i> Introduction to hardware components</li>
+            <li><i class="fas fa-check-circle"></i> Operating system navigation (Windows, etc.)</li>
+            <li><i class="fas fa-check-circle"></i> Internet and email usage training</li>
+            <li><i class="fas fa-check-circle"></i> File management and data organization</li>
+            <li><i class="fas fa-check-circle"></i> Basic troubleshooting skills</li>
+            <li><i class="fas fa-check-circle"></i> Networking fundamentals (LAN, Wi-Fi basics)</li>
+            <li><i class="fas fa-check-circle"></i> Practical hands-on exercises</li>
+          </ul>
+        </div>
+
+        <!-- Microsoft Office Solutions -->
+        <div class="service-card">
+          <i class="fas fa-file-alt"></i>
+          <h3>Microsoft Office Solutions</h3>
+          <div class="service-desc">Boost productivity with Office mastery</div>
+          <ul class="service-list">
+            <li><i class="fas fa-check-circle"></i> Microsoft Word (document creation, formatting)</li>
+            <li><i class="fas fa-check-circle"></i> Microsoft Excel (formulas, charts, analysis)</li>
+            <li><i class="fas fa-check-circle"></i> Microsoft PowerPoint (presentations, design)</li>
+            <li><i class="fas fa-check-circle"></i> Microsoft Access (database basics)</li>
+            <li><i class="fas fa-check-circle"></i> Microsoft Outlook (email management)</li>
+            <li><i class="fas fa-check-circle"></i> Microsoft 365 tools (Teams, OneDrive)</li>
+            <li><i class="fas fa-check-circle"></i> Data entry, reporting, and automation</li>
+            <li><i class="fas fa-check-circle"></i> Excel macros for automation</li>
+          </ul>
+        </div>
+
+        <!-- Programming & Development Training -->
+        <div class="service-card">
+          <i class="fas fa-code"></i>
+          <h3>Programming & Development</h3>
+          <div class="service-desc">Build real-world coding skills</div>
+          <ul class="service-list">
+            <li><i class="fas fa-check-circle"></i> Introduction to programming concepts</li>
+            <li><i class="fas fa-check-circle"></i> Python, JavaScript, Java, PHP, C# training</li>
+            <li><i class="fas fa-check-circle"></i> Building real-world projects (web apps, systems)</li>
+            <li><i class="fas fa-check-circle"></i> Debugging and problem-solving techniques</li>
+            <li><i class="fas fa-check-circle"></i> Version control using Git and GitHub</li>
+            <li><i class="fas fa-check-circle"></i> Database integration with applications</li>
+            <li><i class="fas fa-check-circle"></i> API usage and development basics</li>
+            <li><i class="fas fa-check-circle"></i> Career guidance and portfolio development</li>
+          </ul>
+        </div>
+
+        <!-- Design & Creative Services -->
+        <div class="service-card">
+          <i class="fas fa-palette"></i>
+          <h3>Design & Creative Services</h3>
+          <div class="service-desc">Elevate your brand identity</div>
+          <ul class="service-list">
+            <li><i class="fas fa-check-circle"></i> Logo design and brand identity creation</li>
+            <li><i class="fas fa-check-circle"></i> UI/UX design for web and mobile apps</li>
+            <li><i class="fas fa-check-circle"></i> Social media graphics and marketing materials</li>
+            <li><i class="fas fa-check-circle"></i> Posters, flyers, and promotional content</li>
+            <li><i class="fas fa-check-circle"></i> Business cards, certificates, company profiles</li>
+            <li><i class="fas fa-check-circle"></i> Image editing and content enhancement</li>
+            <li><i class="fas fa-check-circle"></i> Website and app interface prototyping</li>
+            <li><i class="fas fa-check-circle"></i> Brand consistency and design consulting</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Clients Section with Logo Upload Placeholders -->
+  <section id="clients">
+    <div class="container">
+      <div class="clients-section">
+        <h2 class="section-title">Our Valued Clients</h2>
+        <p style="text-align: center; margin-bottom: 2rem; color: #5C6E7A;">Trusted by businesses and educational institutions across Lesotho</p>
+        
+        <div class="clients-grid">
+          <!-- Moltech Solutions - Replace src with your logo file -->
+          <div class="client-card">
+            <div class="client-logo">
+              <img src="client-moltech.png" alt="Moltech Solutions Logo" onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=\'client-logo-placeholder\'><i class=\'fas fa-chart-simple\'></i></div>';">
+            </div>
+            <h4>Moltech Solutions</h4>
+            <span class="client-type">Technology & IT Services</span>
+          </div>
+          
+          <!-- Emmanuel English Medium Primary School -->
+          <div class="client-card">
+            <div class="client-logo">
+              <img src="client-emmanuel.png" alt="Emmanuel English Medium Primary School" onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=\'client-logo-placeholder\'><i class=\'fas fa-school\'></i></div>';">
+            </div>
+            <h4>Emmanuel English Medium<br>Primary School</h4>
+            <span class="client-type">Educational Institution</span>
+          </div>
+          
+          <!-- Roadsite Motors -->
+          <div class="client-card">
+            <div class="client-logo">
+              <img src="client-roadsite.png" alt="Roadsite Motors" onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=\'client-logo-placeholder\'><i class=\'fas fa-car\'></i></div>';">
+            </div>
+            <h4>Roadsite Motors</h4>
+            <span class="client-type">Automotive Services</span>
+          </div>
+          
+          <!-- Little wonders English Medium School -->
+          <div class="client-card">
+            <div class="client-logo">
+              <img src="client-littlewonders.png" alt="Little Wonders English Medium School" onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=\'client-logo-placeholder\'><i class=\'fas fa-child\'></i></div>';">
+            </div>
+            <h4>Little Wonders English<br>Medium School</h4>
+            <span class="client-type">Educational Institution</span>
+          </div>
+          
+          <!-- Evergreen English Medium School -->
+          <div class="client-card">
+            <div class="client-logo">
+              <img src="client-evergreen.png" alt="Evergreen English Medium School" onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=\'client-logo-placeholder\'><i class=\'fas fa-tree\'></i></div>';">
+            </div>
+            <h4>Evergreen English<br>Medium School</h4>
+            <span class="client-type">Educational Institution</span>
+          </div>
+          
+          <!-- Rise&Shine English Medium School -->
+          <div class="client-card">
+            <div class="client-logo">
+              <img src="client-riseandshine.png" alt="Rise & Shine English Medium School" onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=\'client-logo-placeholder\'><i class=\'fas fa-sun\'></i></div>';">
+            </div>
+            <h4>Rise & Shine English<br>Medium School</h4>
+            <span class="client-type">Educational Institution</span>
+          </div>
+        </div>
+        
+        <div class="trust-badge">
+          <p><i class="fas fa-star"></i> <i class="fas fa-star"></i> <i class="fas fa-star"></i> <i class="fas fa-star"></i> <i class="fas fa-star"></i></p>
+          <p>Join our growing family of satisfied clients — <strong>your success is our mission</strong></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="about">
+    <div class="container">
+      <h2 class="section-title">About Molapo's Innovation Hub</h2>
+      <div class="about-content">
+        <div class="about-text">
+          <p><strong>Molapo's Innovation Hub Tech</strong> was born from a passion to merge technology with creative intelligence. We are a dynamic team of consultants, developers, and educators delivering premium ICT solutions across Africa and beyond.</p>
+          <p>We specialize in bridging the skills gap with high-impact tutoring — from Microsoft packages to advanced programming — while offering full-cycle software development and brand elevation. Our philosophy: <strong>Tech Savvy, Human Centered.</strong></p>
+          <p><i class="fas fa-check-circle" style="color: var(--accent-gold);"></i>  Bespoke digital strategies <br>
+          <i class="fas fa-check-circle" style="color: var(--accent-gold);"></i>  Industry certified trainers <br>
+          <i class="fas fa-check-circle" style="color: var(--accent-gold);"></i>  End-to-end project support</p>
+        </div>
+        <div class="about-stats">
+          <div class="stat-item">
+            <div class="stat-number">6+</div>
+            <div>Trusted Clients</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-number">35+</div>
+            <div>Students Trained</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-number">3+</div>
+            <div>Years Experience</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-number">100%</div>
+            <div>Satisfaction Rate</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="founder">
+    <div class="container founder-section">
+      <h2 class="section-title">Meet Our Core Founder</h2>
+      <div class="founder-card">
+        <div class="founder-avatar">
+          <div class="founder-avatar-img">
+            <img src="vin.jpg" alt="Tsietsi Molapo" onerror="this.style.display='none'; this.parentElement.innerHTML='<div style=\'width:100%;height:100%;display:flex;align-items:center;justify-content:center\'><i class=\'fas fa-user-tie\' style=\'font-size:4rem;color:var(--accent-gold);\'></i></div>';">
+          </div>
+          <h3>Tsietsi Molapo</h3>
+          <div class="founder-title">FOUNDER & PRINCIPAL IT CONSULTANT</div>
+        </div>
+        <div class="founder-bio">
+          <p><strong>Tsietsi Molapo</strong> is a passionate IT professional with experience in <strong>IT support, data analysis, and website development</strong>. He has developed a strong foundation in network systems, cloud technologies, and digital tools for data-driven decision-making.</p>
+          
+          <div class="cert-badge">
+            <span class="cert-tag">IT Customer Support</span>
+            <span class="cert-tag">Network Support & Security</span>
+            <span class="cert-tag">Cisco CCNA Prep</span>
+            <span class="cert-tag">CompTIA Network+</span>
+            <span class="cert-tag">Cloud Security</span>
+            <span class="cert-tag">Data Science</span>
+            <span class="cert-tag">Data Analysis</span>
+          </div>
+          
+          <a href="https://www.linkedin.com/in/tsietsi-molapo-2a3550224" class="linkedin-link" target="_blank">
+            <i class="fab fa-linkedin"></i> Connect on LinkedIn
+          </a>
+        </div>
+        <div class="founder-quote">
+          <i class="fas fa-quote-left"></i>
+          <p style="margin-top: 0.5rem;">"Technology married with creative human insight unlocks real potential. I'm driven by solving problems and empowering communities."</p>
+          <p style="margin-top: 0.8rem; font-weight: 600;">— Tsietsi Molapo</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <div class="container">
+      <h2 class="section-title">Let's Innovate Together</h2>
+      <div class="contact-wrapper">
+        <div class="contact-info">
+          <h3><i class="fas fa-headset"></i> Connect with us</h3>
+          <div class="contact-detail">
+            <i class="fas fa-map-marker-alt"></i>
+            <span>Maseru 100 ,Semphetenyane / Ha Pita, Lesotho</span>
+          </div>
+          <div class="contact-detail">
+            <i class="fas fa-phone-alt"></i>
+            <a href="tel:+26657892010">+266 5789 2010</a>
+            <a href="tel:+26657892010">+266 5767 1333</a>
+            <a href="tel:+26657892010">+266 6222 2010</a>
+          </div>
+          <div class="contact-detail">
+            <i class="fas fa-envelope"></i>
+            <a href="mailto:molaposinnovationhubtech@gmail.com">molaposinnovationhubtech@gmail.com</a>
+          </div>
+          <div class="social-links">
+            <a href="https://www.linkedin.com/in/tsietsi-molapo-2a3550224" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+          </div>
+        </div>
+        <div class="contact-form">
+          <h3><i class="fas fa-paper-plane"></i> Request a quote</h3>
+          <form id="contactForm" action="https://formsubmit.co/molaposinnovationhubtech@gmail.com" method="POST">
+            <input type="hidden" name="_subject" value="New Inquiry">
+            <input type="hidden" name="_captcha" value="false">
+            <input type="text" name="name" placeholder="Full name *" required>
+            <input type="email" name="email" placeholder="Email address *" required>
+            <input type="text" name="_subject" placeholder="Subject" value="General Inquiry">
+            <textarea rows="4" name="message" placeholder="Tell us about your project *" required></textarea>
+            <button type="submit">Send Message <i class="fas fa-arrow-right"></i></button>
+            <div id="formFeedback" class="form-message"></div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<a href="#" class="back-to-top" id="backToTop">
+  <i class="fas fa-arrow-up"></i>
+</a>
+
+<a href="https://wa.me/26657892010?text=Hello! I'm interested in your services" class="whatsapp-float" target="_blank">
+  <i class="fab fa-whatsapp"></i>
+  <span>Chat with us</span>
+</a>
+
+<footer>
+  <div class="container">
+    <p>© 2025 Molapo's Innovation Hub Tech — ICT Consultancy & Branding. All rights reserved.</p>
+    <p style="margin-top: 0.5rem; font-size: 0.75rem;">Serving: Moltech Solutions, Emmanuel English Medium PS, Roadsite Motors, Little Wonders, Evergreen, Rise & Shine</p>
+  </div>
+</footer>
+
+<script>
+  (function() {
+    // Mobile menu
+    const menuIcon = document.getElementById('menuIcon');
+    const navLinks = document.getElementById('navLinks');
+    if (menuIcon) {
+      menuIcon.addEventListener('click', () => navLinks.classList.toggle('show'));
+    }
+
+    // Scroll progress
+    window.addEventListener('scroll', () => {
+      const winScroll = document.documentElement.scrollTop;
+      const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+      document.getElementById('progressBar').style.width = (winScroll / height) * 100 + '%';
+      
+      // Header shadow
+      document.getElementById('header').classList.toggle('scrolled', window.scrollY > 50);
+      
+      // Back to top
+      const backBtn = document.getElementById('backToTop');
+      if (window.scrollY > 300) backBtn.classList.add('show');
+      else backBtn.classList.remove('show');
+    });
+
+    // Smooth scroll
+    document.querySelectorAll('.nav-link').forEach(link => {
+      link.addEventListener('click', function(e) {
+        e.preventDefault();
+        const id = this.getAttribute('href').substring(1);
+        document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
+        navLinks.classList.remove('show');
+      });
+    });
+
+    // Logo click to top
+    document.querySelector('.logo')?.addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+
+    // Back to top
+    document.getElementById('backToTop').addEventListener('click', (e) => {
+      e.preventDefault();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+
+    // Scroll reveal
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) entry.target.classList.add('visible');
+      });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('section').forEach(section => observer.observe(section));
+
+    // Active nav highlight
+    window.addEventListener('scroll', () => {
+      const sections = document.querySelectorAll('section');
+      let current = '';
+      sections.forEach(section => {
+        const top = section.offsetTop - 150;
+        if (window.scrollY >= top) current = section.getAttribute('id');
+      });
+      document.querySelectorAll('.nav-link').forEach(link => {
+        link.classList.remove('active');
+        if (link.getAttribute('href') === `#${current}`) link.classList.add('active');
+      });
+    });
+
+    // Form validation
+    const form = document.getElementById('contactForm');
+    const feedback = document.getElementById('formFeedback');
+    if (form) {
+      form.addEventListener('submit', (e) => {
+        const name = form.querySelector('[name="name"]').value.trim();
+        const email = form.querySelector('[name="email"]').value.trim();
+        const msg = form.querySelector('[name="message"]').value.trim();
+        if (!name || !email || !msg) {
+          e.preventDefault();
+          feedback.innerHTML = '⚠️ Please fill all required fields';
+          feedback.className = 'form-message error';
+        }
+      });
+    }
+
+    // Logo fallback
+    const logoImg = document.querySelector('.logo-img');
+    const fallback = document.querySelector('.logo-icon-fallback');
+    if (logoImg && logoImg.complete && logoImg.naturalWidth === 0) {
+      logoImg.style.display = 'none';
+      fallback.style.display = 'flex';
+    }
+    logoImg?.addEventListener('error', () => {
+      logoImg.style.display = 'none';
+      fallback.style.display = 'flex';
+    });
+  })();
+</script>
+</body>
+</html>
